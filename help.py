@@ -1,3 +1,8 @@
-s = "/u/1"
+from parse import parse
 
-print(s.split("/"))
+# "/u/id/name" -> "/u/1/aa" -> id = 1, name = aa
+
+
+parsed = parse("/u/{id}/{name}", "/")
+
+print(parsed)

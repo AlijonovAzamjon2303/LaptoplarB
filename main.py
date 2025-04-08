@@ -18,7 +18,7 @@ def about(request, response):
     response.text = "About pagedan Azizxonga salom!"
 
 
-@app.route("/u/id")
+@app.route("/u/{id}")
 def get_info(request, response, id):
     users = load_users()
     user = users.get(id, "Bunday user yo'q!")

@@ -1,4 +1,5 @@
 from webob import Request, Response
+from parse import parse
 
 class FrameWorkApp:
     def __init__(self):
@@ -13,13 +14,13 @@ class FrameWorkApp:
         res = Response()
 
         for path, handler in self.routes.items():
-            lst = req.path.split("/")
-
-            if path == "/u/id" and len(lst) > 2:
-                handler(req, res, lst[2])
-
             if path == req.path:
                 handler(req, res)
+            else:
+                parsed = parse(path, req.path)
+
+                if parsed is not None:
+                    handler(req, res, parsed.named.get("id", "Bunday user yo'q!"))
 
         return res
 
