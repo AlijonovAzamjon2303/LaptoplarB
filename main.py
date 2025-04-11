@@ -9,9 +9,22 @@ def load_users():
 
     return users
 
+def load_view():
+    with open("view.json", "r") as file:
+        data = json.load(file)
+
+    return data
+
+cnt = load_view()
+
 @app.route("/home")
 def home(request, response):
-    response.text = "Home pagedan uyquli salom!"
+    global cnt
+    cnt += 1
+    with open("view.json", "w") as file:
+        json.dump(cnt, file)
+    response.text = f"Home pagedan uyquli salom! - {cnt}"
+
 
 @app.route("/about")
 def about(request, response):
